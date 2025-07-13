@@ -69,7 +69,6 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UsersCont
         txtFullName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
         txtConfirm = new javax.swing.JTextField();
         btnCreate = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
@@ -85,6 +84,7 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UsersCont
         btnUnCheckAll = new javax.swing.JButton();
         btnDeleteCheckedItems = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JPasswordField();
 
         jButton6.setText("jButton1");
 
@@ -107,7 +107,11 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UsersCont
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -125,12 +129,6 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UsersCont
 
         jLabel4.setText("Mật khẩu");
 
-        txtPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordActionPerformed(evt);
-            }
-        });
-
         txtConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtConfirmActionPerformed(evt);
@@ -138,12 +136,32 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UsersCont
         });
 
         btnCreate.setText("Tạo mới");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setText("Cập nhật");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("Xóa");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnClear.setText("Nhập mới");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         btgService.add(rdbQuanLy);
         rdbQuanLy.setText("Quản lý");
@@ -197,15 +215,16 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UsersCont
                 .addGap(30, 30, 30)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(rdbQuanLy, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(rdbNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rdbNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(139, 139, 139)
@@ -253,7 +272,7 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UsersCont
                             .addComponent(txtConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rdbQuanLy)
                     .addComponent(rdbNhanVien)
@@ -279,16 +298,11 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UsersCont
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -298,13 +312,34 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UsersCont
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserNameActionPerformed
 
-    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPasswordActionPerformed
-
     private void txtConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtConfirmActionPerformed
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        // TODO add your handling code here:
+        this.create();
+    }//GEN-LAST:event_btnCreateActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        this.update();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        this.delete();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        // TODO add your handling code here:
+        this.clear();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        this.open();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -373,7 +408,9 @@ List<UserE> items = new ArrayList<>();
             false
         });
     }
+System.out.println("User count: " + dao.findAll().size());
 }
+    
 
 
     @Override
@@ -422,10 +459,10 @@ public UserE getForm() {
     UserE user = new UserE();
     user.setUsername(txtUserName.getText().trim());
     user.setPassword(new String(txtPassword.getPassword()));
-    user.setFullname(txtFullName.getText().trim());
-    user.setPhoto("default.png"); // Cập nhật tùy logic ảnh
-    user.setManager(rdbQuanLy.isSelected());
-    user.setEnabled(rdbhd.isSelected());
+    user.setFullnameUser(txtFullName.getText().trim());
+    user.setPhotoUser("default.png"); // Cập nhật tùy logic ảnh
+    user.setService(rdbQuanLy.isSelected());
+    user.setStatusUser(rdbhd.isSelected());
     return user;
 }
 
@@ -433,8 +470,8 @@ public UserE getForm() {
 public void setForm(UserE user) {
     txtFullName.setText(user.getUsername());
     txtPassword.setText(user.getPassword());
-    txtConfirmPassword.setText(user.getPassword());
-    txtFullname.setText(user.getFullname());
+    txtConfirm.setText(user.getPassword());
+    txtFullName.setText(user.getFullnameUser());
 
     // Ảnh đại diện
 //    String imgPath = "/poly/cafe/icon/" + user.getPhoto();
@@ -446,16 +483,16 @@ public void setForm(UserE user) {
 //    }
 
     // Vai trò
-    (user.isManager() ? rdbManager : rdbEmployee).setSelected(true);
+    (user.isService()? rdbQuanLy : rdbNhanVien).setSelected(true);
     // Trạng thái
-    (user.isEnabled() ? rdbEnabled : rdbDisabled).setSelected(true);
+    (user.isStatusUser()? rdbhd : rdbtn).setSelected(true);
 }
 
 
 @Override
 public void create() {
     try {
-        Users user = getForm();
+        UserE user = getForm();
         dao.create(user);
         fillToTable();
         clear();
@@ -465,94 +502,99 @@ public void create() {
     }
 }
 
-//@Override
-//public void update() {
-//    try {
-//        Users user = getForm();
-//        dao.update(user);
-//        fillToTable();
-//        XDialog.alert("Cập nhật thành công!");
-//    } catch (Exception ex) {
-//        XDialog.alert("Lỗi: " + ex.getMessage());
-//    }
-//}
+@Override
+public void update() {
+    try {
+        UserE user = getForm();
+        dao.update(user);
+        fillToTable();
+        XDialog.alert("Cập nhật thành công!");
+    } catch (Exception ex) {
+        XDialog.alert("Lỗi: " + ex.getMessage());
+    }
+}
 
-//@Override
-//public void delete() {
-//    if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
-//        String id = txtUsername.getText().trim();
-//        if (id.isEmpty()) {
-//            XDialog.alert("Vui lòng chọn tài khoản cần xóa");
-//            return;
-//        }
-//        dao.deleteById(id);
-//        fillToTable();
-//        clear();
-//        XDialog.alert("Xóa thành công!");
-//    }
-//}
+@Override
+public void delete() {
+    if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
+        String id = txtUserName.getText().trim();
+        if (id.isEmpty()) {
+            XDialog.alert("Vui lòng chọn tài khoản cần xóa");
+            return;
+        }
+        dao.deleteById(id);
+        fillToTable();
+        clear();
+        XDialog.alert("Xóa thành công!");
+    }
+}
 
 
 
-//@Override
-//public void clear() {
-//    txtUsername.setText("");
-//    txtPassword.setText("");
-//    txtConfirmPassword.setText("");
-//    txtFullname.setText("");
-//    rdbEmployee.setSelected(true);
-//    rdbEnabled.setSelected(true);
-//    setEditable(false);
-//}
+@Override
+public void clear() {
+    txtUserName.setText("");
+    txtPassword.setText("");
+    txtConfirm.setText("");
+    txtFullName.setText("");
+    rdbNhanVien.setSelected(true);
+    rdbtn.setSelected(true);
+    setEditable(false);
+}
 
-// @Override
-//public void setEditable(boolean editable) {
-//    txtUsername.setEnabled(!editable);
-//    btnCreate.setEnabled(!editable);
-//    btnUpdate.setEnabled(editable);
-//    btnDelete.setEnabled(editable);
-//    int rowCount = tblUsers.getRowCount();
+ @Override
+public void setEditable(boolean editable) {
+    txtUserName.setEnabled(!editable);
+    btnCreate.setEnabled(!editable);
+    btnUpdate.setEnabled(editable);
+    btnDelete.setEnabled(editable);
+    int rowCount = tblUsers.getRowCount();
 //    btnMoveFirst.setEnabled(editable && rowCount > 0);
 //    btnMovePrevious.setEnabled(editable && rowCount > 0);
 //    btnMoveNext.setEnabled(editable && rowCount > 0);
 //    btnMoveLast.setEnabled(editable && rowCount > 0);
-//}
+}
 
-//@Override
-//public void edit() {
-//    int row = tblUsers.getSelectedRow();
-//    if (row >= 0 && row < items.size()) {
-//        setForm(items.get(row));
-//        setEditable(true);
+@Override
+public void edit() {
+    int row = tblUsers.getSelectedRow();
+    if (row >= 0 && row < items.size()) {
+        setForm(items.get(row));
+        setEditable(true);
 //        tabs.setSelectedIndex(1);
-//    } else {
-//        XDialog.alert("Vui lòng chọn một bản ghi hợp lệ để chỉnh sửa");
-//    }
-//}
+    } else {
+        XDialog.alert("Vui lòng chọn một bản ghi hợp lệ để chỉnh sửa");
+    }
+}
 
 
 
-public void moveFirst() {
+    @Override
+    public void moveFirst() {
     moveTo(0);
 }
 
 
-public void movePrevious() {
+    @Override
+    public void movePrevious() {
     moveTo(tblUsers.getSelectedRow() - 1);
 }
 
 
-public void moveNext() {
+    @Override
+    public void moveNext() {
     moveTo(tblUsers.getSelectedRow() + 1);
 }
 
 
-public void moveLast() {
+    @Override
+    public void moveLast() {
     moveTo(tblUsers.getRowCount() - 1);
 }
 
 
-public void moveTo(int index) {
+    @Override
+    public void moveTo(int index) {
     if (tblUsers.getRowCount() == 0) {
         XDialog.alert("Không có dữ liệu để di chuyển");
         return;
@@ -597,9 +639,19 @@ public void moveTo(int index) {
     private javax.swing.JTable tblUsers;
     private javax.swing.JTextField txtConfirm;
     private javax.swing.JTextField txtFullName;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
+
+//    @Override
+//    public void update() {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
+//
+//    @Override
+//    public void delete() {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
 }
 
 

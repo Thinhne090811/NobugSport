@@ -35,9 +35,6 @@ public class BillManagerJDialog extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBill = new javax.swing.JTable();
-        btnCheckAll = new javax.swing.JButton();
-        btnUnCheckAll = new javax.swing.JButton();
-        btnDeleteCheckedItems = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -84,15 +81,6 @@ public class BillManagerJDialog extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 78, 870, 259));
 
-        btnCheckAll.setText("Chọn tất cả");
-        getContentPane().add(btnCheckAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, -1, -1));
-
-        btnUnCheckAll.setText("Xóa các mục đã chọn");
-        getContentPane().add(btnUnCheckAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, -1, -1));
-
-        btnDeleteCheckedItems.setText("Xóa các đã chọn");
-        getContentPane().add(btnDeleteCheckedItems, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, -1, -1));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -132,9 +120,6 @@ public class BillManagerJDialog extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCheckAll;
-    private javax.swing.JButton btnDeleteCheckedItems;
-    private javax.swing.JButton btnUnCheckAll;
     private javax.swing.JComboBox<String> cboTimeRange;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

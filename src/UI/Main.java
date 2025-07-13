@@ -4,18 +4,34 @@
  */
 package UI;
 
+import DAO.Maincontroller;
+import Until.XAuth;
+
 /**
  *
  * @author HAPPY
  */
-public class Main extends javax.swing.JFrame {
+public class Main extends javax.swing.JFrame implements Maincontroller {
 
     /**
      * Creates new form Main
      */
     public Main() {
+        this.init();
         initComponents();
     }
+    @Override
+    public void init(){
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.showWelcomeJDialog(this);
+        this.showLoginJDialog(this);
+        if (!XAuth.user.isService()) {
+            menu.remove(manager);
+        }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -163,9 +179,14 @@ public class Main extends javax.swing.JFrame {
             .addGroup(menuLayout.createSequentialGroup()
                 .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(menuLayout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblService, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblName)))
+                    .addGroup(menuLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnHome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(menuLayout.createSequentialGroup()
                                 .addComponent(btnMore, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -173,13 +194,8 @@ public class Main extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnEdit))))
                     .addGroup(menuLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(menuLayout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblService, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblName))))
+                        .addGap(42, 42, 42)
+                        .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         menuLayout.setVerticalGroup(
@@ -190,9 +206,9 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(btnMore)
                     .addComponent(btnSetting)
                     .addComponent(btnEdit))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblService)
@@ -207,7 +223,7 @@ public class Main extends javax.swing.JFrame {
 
         btnExit.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnExit.setText("Thoát");
-        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 320, 250, 100));
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 390, 210, 70));
 
         btnChangePassword.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnChangePassword.setText("Đổi mật khẩu");
@@ -216,7 +232,7 @@ public class Main extends javax.swing.JFrame {
                 btnChangePasswordActionPerformed(evt);
             }
         });
-        getContentPane().add(btnChangePassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 320, 250, 100));
+        getContentPane().add(btnChangePassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 400, 200, 60));
 
         btnHistory.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnHistory.setText("Lịch Sử");
@@ -225,11 +241,16 @@ public class Main extends javax.swing.JFrame {
                 btnHistoryActionPerformed(evt);
             }
         });
-        getContentPane().add(btnHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 130, 250, 100));
+        getContentPane().add(btnHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 290, 210, 60));
 
         btnSale.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnSale.setText("Bán Hàng");
-        getContentPane().add(btnSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 250, 100));
+        btnSale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaleActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 200, 60));
 
         pack();
         setLocationRelativeTo(null);
@@ -282,6 +303,11 @@ public class Main extends javax.swing.JFrame {
     private void btnHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoryActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnHistoryActionPerformed
+
+    private void btnSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaleActionPerformed
+        // TODO add your handling code here:
+        this.showSalesJDialog(this);
+    }//GEN-LAST:event_btnSaleActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,4 +365,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel manager;
     private javax.swing.JPanel menu;
     // End of variables declaration//GEN-END:variables
+
+   
 }
