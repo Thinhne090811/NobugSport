@@ -4,19 +4,21 @@
  */
 package Until;
 
-//import poly.cafe.entity.Users;
+
+import Entity.UserE;
+
 
 /**
  *
  * @author HAPPY
  */
-//public class XAuth {
-//    public static Users user = Users.builder()
-//            .username("tien123")
-//            .password("123")
-//            .enabled(true)
-//            .manager(true)
-//            .fullname("tien")
-//            .photo("trump.png")
-//            .build();
-//}
+public class XAuth {
+public static UserE user = UserE.builder()
+.Username("admin")
+.Password("123456")
+.StatusUser(true)
+.Service(true)
+.FullnameUser("Nguyễn Văn Tèo")
+.PhotoUser("trump.png")
+.build();
+}
