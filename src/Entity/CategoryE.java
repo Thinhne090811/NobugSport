@@ -17,7 +17,10 @@ import lombok.*;
 public class CategoryE {
     private String IdCategory;
     private String NameCategory;
-
+@Override
+    public String toString() {
+        return this.NameCategory;
+    }
    
     
 }
